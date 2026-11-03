@@ -1,0 +1,105 @@
+[suite]
+name = "softfactory-pairwise-pack"
+version = "0.1.0"
+description = "Double-blind pairwise comparison suite with length capping and position bias control for Soft Factory"
+
+[weights]
+critical = 0.50
+core = 0.35
+hygiene = 0.15
+
+[[cases]]
+id = "sf-vsp-rls-migration-ab"
+stratum = "critical"
+severity = "blocker"
+description = "Pairwise A/B comparison of candidate database migrations for tenant boundary safety"
+pairs_path = "packs/fixtures/vsp_rls_ab_60.jsonl"
+candidate_a = "claude-sonnet"
+candidate_b = "codex"
+pinned_model = "claude-3-5-sonnet-20241022"
+judge_temperature = 0.0
+prompt_version = "v1-double-blind"
+min_pairs = 60
+min_swap_consistency = 0.85
+max_flip_rate = 0.15
+min_swap_kappa = 0.70
+max_length_correlation = 0.25
+max_verbosity_inflation = 0.20
+min_critique_words = 6
+
+[cases.length_policy]
+mode = "cap_at_budget"
+max_tokens = 180
+max_chars = 720
+strip_fluff = true
+length_matched_tau = 0.10
+
+[cases.rubric]
+title = "VSP Supabase RLS Migration Safety Pairwise Rubric"
+instruction = "Critique both SQL migration candidates. Choose which candidate enforces tighter row-level security without permissive USING(true) leakage."
+required_tokens = ["tenant", "boundary"]
+forbidden_tokens = ["USING (true)"]
+
+[[cases]]
+id = "sf-techtideai2-orchestrator-ab"
+stratum = "core"
+severity = "graded"
+description = "Pairwise A/B comparison of orchestrator routing plans for concise tool execution"
+pairs_path = "packs/fixtures/techtideai2_orchestrator_ab_60.jsonl"
+candidate_a = "concise-director"
+candidate_b = "verbose-planner"
+pinned_model = "gpt-4o-2024-11-20"
+judge_temperature = 0.0
+prompt_version = "v1-double-blind"
+min_pairs = 60
+min_swap_consistency = 0.80
+max_flip_rate = 0.20
+min_swap_kappa = 0.65
+max_length_correlation = 0.25
+max_verbosity_inflation = 0.20
+min_critique_words = 6
+
+[cases.length_policy]
+mode = "cap_at_budget"
+max_tokens = 160
+max_chars = 640
+strip_fluff = true
+length_matched_tau = 0.10
+
+[cases.rubric]
+title = "TechTideAI2 Orchestrator Route Efficiency Rubric"
+instruction = "Critique both routing plans. Choose the candidate that minimizes redundant intermediate tool dispatches."
+required_tokens = ["dispatch", "boundary"]
+forbidden_tokens = []
+
+[[cases]]
+id = "sf-harness-handoff-ab"
+stratum = "hygiene"
+severity = "graded"
+description = "Pairwise A/B comparison of session handoff summaries in agent-harness"
+pairs_path = "packs/fixtures/harness_handoff_ab_60.jsonl"
+candidate_a = "structured-handoff"
+candidate_b = "conversational-note"
+pinned_model = "claude-3-5-haiku-20241022"
+judge_temperature = 0.0
+prompt_version = "v1-double-blind"
+min_pairs = 60
+min_swap_consistency = 0.80
+max_flip_rate = 0.20
+min_swap_kappa = 0.65
+max_length_correlation = 0.25
+max_verbosity_inflation = 0.20
+min_critique_words = 6
+
+[cases.length_policy]
+mode = "cap_at_budget"
+max_tokens = 140
+max_chars = 560
+strip_fluff = true
+length_matched_tau = 0.10
+
+[cases.rubric]
+title = "Agent Harness Handoff Rigor Rubric"
+instruction = "Critique both handoff records. Choose the candidate that explicitly lists touched file paths and test status."
+required_tokens = ["handoff", "status"]
+forbidden_tokens = []

@@ -1,0 +1,27 @@
+{
+  "lock_version": "sha256-framed-v1",
+  "suite_name": "softfactory-pairwise-pack",
+  "suite_version": "0.1.0",
+  "suite_digest": "35d9e76de784f33644266d0e2cc81a1689393f6860264dadfde04dd37ffe966d",
+  "cases": {
+    "sf-harness-handoff-ab": {
+      "case_id": "sf-harness-handoff-ab",
+      "stratum": "hygiene",
+      "dataset_sha256": "d16cf454412c32fc98db9ebba431bf75bd5fada05e0a82dde41888042e37e53b",
+      "spec_sha256": "e72874058816581ea26e271b161da7b83987c7cea0249297af71c9e294cc3090"
+    },
+    "sf-techtideai2-orchestrator-ab": {
+      "case_id": "sf-techtideai2-orchestrator-ab",
+      "stratum": "core",
+      "dataset_sha256": "31f029df36f177ed031688a6db4fac3959f0da52ca62fda25961adae8a3a38ea",
+      "spec_sha256": "3d3313ff5e3ca0f21bc629f5580d20e98d0f720e185a64a01db37125625773c5"
+    },
+    "sf-vsp-rls-migration-ab": {
+      "case_id": "sf-vsp-rls-migration-ab",
+      "stratum": "critical",
+      "dataset_sha256": "fb43aded363452b2c35e1b2cabdd2ab02c7480493f9e9c83ac246841e44b2785",
+      "spec_sha256": "e1eee54913dbf498e6897201ac6dc08b788c7085b6ba5d815d142fd464965093"
+    }
+  },
+  "overall_lock_digest": "264ca4cac33b0ad3b7f24450db5ca65a8b2c83f67ab2fb7c26f64ae9b355e54d"
+}

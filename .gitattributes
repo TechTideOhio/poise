@@ -1,0 +1,9 @@
+# Ensure github linguist detects this repository as pure Rust
+fixtures/** linguist-vendored
+packs/** linguist-vendored
+evals/** linguist-vendored
+scripts/** linguist-vendored
+*.toml linguist-vendored
+*.json linguist-vendored
+*.jsonl linguist-vendored
+*.mjs linguist-vendored
