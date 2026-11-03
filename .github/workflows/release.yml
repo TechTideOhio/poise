@@ -3,53 +3,25 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
-  release:
-    name: Build & Release Binary
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            artifact_name: poise
-            asset_name: poise-x86_64-unknown-linux-gnu.tar.gz
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            artifact_name: poise.exe
-            asset_name: poise-x86_64-pc-windows-msvc.zip
-
+  publish:
+    name: Build & Release Binaries
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: Install Rust toolchain
+      - name: Setup Toolchain
         uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
         with:
           toolchain: stable
-          target: ${{ matrix.target }}
 
-      - name: Build release binary
-        run: cargo build --release --target ${{ matrix.target }}
+      - name: Build Release
+        run: cargo build --release
 
-      - name: Package release artifact (Unix)
-        if: runner.os != 'Windows'
-        run: |
-          cd target/${{ matrix.target }}/release
-          tar -czf ../../../${{ matrix.asset_name }} ${{ matrix.artifact_name }}
-
-      - name: Package release artifact (Windows)
-        if: runner.os == 'Windows'
-        shell: bash
-        run: |
-          cd target/${{ matrix.target }}/release
-          7z a ../../../${{ matrix.asset_name }} ${{ matrix.artifact_name }}
-
-      - name: Publish GitHub Release
+      - name: Create Release
         uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda
         with:
-          files: ${{ matrix.asset_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: target/release/poise
