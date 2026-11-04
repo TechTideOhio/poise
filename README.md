@@ -189,6 +189,7 @@ The Complete TideOS Eval Kit spans Tools 1 to 12:
 | **10** | **`poise`** | **`poise-eval`** | **`pairwise-judge-bias`** | **`1.89 MB`** | **Pairwise A/B Position Bias Control, Length Capping & LC-WinRate** |
 | **11** | `plumb` | `plumb-eval` | `paired-statistical-significance` | `0.85 MB` | Paired Statistical Significance, Bootstrap BCa, Exact McNemar & TOST |
 | **12** | `weir` | `weir-eval` | `eval-harness` | `1.76 MB` | CI Deployment Regression Gate, Per-Category Thresholds & PR Reporting |
+| **13** | `eddy` | `eddy-eval` | `online-evals-production` | `< 2.0 MB` | Online Production Evals, Hash Sampling, CUSUM Drift & Shadow Replay |
 
 ---
 
